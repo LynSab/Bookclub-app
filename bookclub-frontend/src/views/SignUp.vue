@@ -1,5 +1,5 @@
 <script setup>
-  import TextInput from '../components/TextInput.vue';
+import TextInput from '../components/TextInput.vue';
 </script>
 
 <template>
@@ -9,13 +9,13 @@
     </div>
 
     <div class="shadow-lg border-2 rounded-md text-slate-600 bg-white row-start-2 col-start-2">
-      <h1 class="m-4 text-2xl font-semibold">Login</h1>
+      <h1 class="m-4 text-2xl font-semibold">Sign-up</h1>
       <TextInput legend-text="Email"/>
       <TextInput legend-text="Password"/> 
-      <button class="shadow-lg border-1 rounded-md p-1 ml-5 cursor-pointer active:bg-slate-200">Log in</button>
+      <TextInput legend-text="Confirm Password"/> 
+      <button class="shadow-lg border-1 rounded-md p-1 ml-5 cursor-pointer active:bg-slate-200">Sign-up</button>
     </div>
   </div>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

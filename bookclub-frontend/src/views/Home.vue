@@ -1,4 +1,5 @@
 <script setup>
+import router from '../router';
 </script>
 
 <template>
@@ -11,7 +12,7 @@
 
   <div class="grid grid-cols-5 rows-1">
     <div class="min-h-[calc(100vh-102px)] border">
-      <button class="w-full shadow-lg border-1 p-2 cursor-pointer active:bg-slate-200">
+      <button @click="router.push({ name: 'Clubs' })" class="w-full shadow-lg border-1 p-2 cursor-pointer active:bg-slate-200">
         My Bookclubs
       </button>
 
@@ -19,7 +20,9 @@
         Create a new club
       </button>
     </div>
-    <div class="col-span-4 p-3">main content</div>
+    <div class="col-span-4 p-3">
+      <router-view />
+    </div>
   </div>
 </template>
 
