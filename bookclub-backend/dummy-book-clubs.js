@@ -5,16 +5,4 @@ const bookclubs = [
   {name:'Club 4', id: 4, members: ['Erik', 'Erin', 'Eustance', 'Ewan', 'Erwing'], book: {name: 'John Dies at the End', author: 'David Wong'}, meeting: '22/05/25'}
 ]
 
-function getClubRecord(id) {
-  let recordByID = {}
-
-  for (let club of bookclubs) {
-    if (club.id == id) {
-      recordByID = club
-    }
-  }
-
-  return recordByID
-}
-
-module.exports =  { getClubRecord, bookclubs };
+module.exports = bookclubs
