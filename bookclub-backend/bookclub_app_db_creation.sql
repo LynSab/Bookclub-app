@@ -1,0 +1,45 @@
+DROP DATABASE IF EXISTS bookclub_app;
+
+CREATE DATABASE bookclub_app;
+USE bookclub_app;
+
+CREATE TABLE users (
+id INT UNIQUE NOT NULL AUTO_INCREMENT,
+username VARCHAR(30),
+email VARCHAR(100) NOT NULL,
+`password` VARCHAR(20),
+PRIMARY KEY (id)
+);
+
+CREATE TABLE clubs (
+id INT UNIQUE NOT NULL AUTO_INCREMENT,
+`name` VARCHAR(50),
+PRIMARY KEY (id)
+);
+
+CREATE TABLE memberships (
+id INT UNIQUE NOT NULL AUTO_INCREMENT,
+club INT,
+`user` INT,
+FOREIGN KEY(club) REFERENCES clubs(id),
+FOREIGN KEY(`user`) REFERENCES users(id),
+PRIMARY KEY(club,`user`)
+);
+
+CREATE TABLE books (
+id INT UNIQUE NOT NULL AUTO_INCREMENT,
+title VARCHAR(200),
+author VARCHAR(100),
+club INT,
+FOREIGN KEY(club) REFERENCES clubs(id),
+PRIMARY KEY (id)
+);
+
+CREATE TABLE meetings (
+id INT UNIQUE NOT NULL AUTO_INCREMENT,
+`date` DATETIME,
+location VARCHAR(100),
+club INT,
+FOREIGN KEY(club) REFERENCES clubs(id),
+PRIMARY KEY (id)
+);
