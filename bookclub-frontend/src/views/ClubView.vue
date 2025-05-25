@@ -9,7 +9,12 @@
 
   async function fetchCurrentClub(clubId) {
     try {
-      const result = await fetch('http://localhost:8080/club/' + clubId)
+      const requestOptions = {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include'
+      }
+      const result = await fetch('http://localhost:8080/club/' + clubId, requestOptions)
         const data = await result.json()
         currentClub.value = data
       } catch(err) {
