@@ -6,7 +6,12 @@
   const bookclubs = ref([])
   async function fetchClubs() {
     try {
-      const result = await fetch('http://localhost:8080/club/')
+      const requestOptions = {
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include'
+      }
+      const result = await fetch('http://localhost:8080/club/', requestOptions)
       const data = await result.json()
       bookclubs.value = data
     } catch(err) {

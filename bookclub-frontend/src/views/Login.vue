@@ -14,7 +14,8 @@
       const requestOptions = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({email: loginEmail, password: loginPassword})
+        body: JSON.stringify({email: loginEmail, password: loginPassword}),
+        credentials: 'include'
       }
       const result = await fetch('http://localhost:8080/user/login/', requestOptions)
       const data = await result.json()
@@ -44,7 +45,7 @@
     <div v-else class="shadow-lg border-2 rounded-md text-slate-600 bg-white row-start-2 col-start-2 p-3">
       <h1 class="m-4 text-2xl font-semibold">Login</h1>
       <TextInput legend-text="Email" v-model:title="email"/>
-      <TextInput legend-text="Password" v-model:title="password"/> 
+      <TextInput type="password" legend-text="Password" v-model:title="password"/> 
       <button @click='handler(email, password)'class="shadow-lg border-1 rounded-md p-1 ml-5 cursor-pointer active:bg-slate-200">Log in</button>
       <div v-if="loginError"> {{ loginError }} </div>
     </div>

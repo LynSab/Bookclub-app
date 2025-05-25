@@ -11,10 +11,4 @@ const connection = knex({
   },
 })
 
-//db query example
-connection('users').where('id', 1).select(['email']).then(function (data) {
-  console.log('success')
-  console.log(data)
-}).catch(function (error) {
-  console.log(error)
-})
+module.exports = connection
