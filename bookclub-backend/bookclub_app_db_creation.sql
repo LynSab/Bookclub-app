@@ -6,7 +6,7 @@ USE bookclub_app;
 CREATE TABLE users (
 id INT UNIQUE NOT NULL AUTO_INCREMENT,
 username VARCHAR(30),
-email VARCHAR(100) NOT NULL,
+email VARCHAR(100) NOT NULL UNIQUE,
 `password` VARCHAR(100),
 PRIMARY KEY (id)
 );
