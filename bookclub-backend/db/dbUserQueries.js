@@ -10,4 +10,18 @@ async function fetchUserByEmail(userEmail) {
   }
 }
 
-module.exports = { fetchUserByEmail }
+async function createNewUser(newUser) {
+  try {
+    await connection('users').insert(newUser)
+    return true
+  } catch(err) {
+    console.log(err)
+    if (err.code == 'ER_DUP_ENTRY') {
+      return 'Duplicate'
+    } else {
+      return false
+    }
+  }
+}
+
+module.exports = { fetchUserByEmail, createNewUser }

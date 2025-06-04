@@ -3,7 +3,6 @@ const jwt = require('jsonwebtoken')
 const { fetchUserByEmail } = require('../../db/dbUserQueries')
 
 async function login(req, res) {
-  console.log('hello')
   const loginEmail = req.body.email
   const loginPass = req.body.password
 
