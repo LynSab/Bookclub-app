@@ -9,6 +9,8 @@ An app for book club management.
 
 2. Install dependancies by running the command `npm install` for both the bookclub-backend and bookclub-frontend folders.
 
+3. Create the database by running the file `bookclub_app_db_creation.sql` in MySQL Workbench
+
 ## Running in development mode
 
 To run the frontend:
