@@ -10,4 +10,14 @@ async function createNewClub(newClub) {
   }
 }
 
-module.exports = { createNewClub }
+async function createNewMembership(newMembership) {
+  try {
+    await connection('memberships').insert(newMembership)
+    return true
+  } catch(err) {
+    console.log(err)
+    return false
+  }
+}
+
+module.exports = { createNewClub, createNewMembership }
