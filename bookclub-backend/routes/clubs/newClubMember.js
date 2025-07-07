@@ -2,10 +2,11 @@ const { fetchUserByEmail } = require('../../db/dbUserQueries')
 const { createNewMembership } = require('../../db/dbClubQueries')
 
 async function addNewMember(req, res) {
-  userEmail = req.body.email
-  clubID = req.body.club
+  const userEmail = req.body.email
+  const clubID = req.body.club
+  
   try{
-    user = await fetchUserByEmail(userEmail)
+    const user = await fetchUserByEmail(userEmail)
     memberDetail = {
       club: clubID,
       user: user.id
@@ -26,7 +27,7 @@ async function addNewMember(req, res) {
       return
     }
 
-    membershipData = await createNewMembership(memberDetail)
+    const membershipData = await createNewMembership(memberDetail)
 
     if (membershipData === false) {
     res.json({

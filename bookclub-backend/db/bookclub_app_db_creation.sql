@@ -30,7 +30,7 @@ CREATE TABLE books (
 id INT UNIQUE NOT NULL AUTO_INCREMENT,
 title VARCHAR(200),
 author VARCHAR(100),
-club INT,
+club INT UNIQUE,
 FOREIGN KEY(club) REFERENCES clubs(id),
 PRIMARY KEY (id)
 );
@@ -38,8 +38,8 @@ PRIMARY KEY (id)
 CREATE TABLE meetings (
 id INT UNIQUE NOT NULL AUTO_INCREMENT,
 `date` DATETIME,
-location VARCHAR(100),
-club INT,
+location VARCHAR(300),
+club INT UNIQUE,
 FOREIGN KEY(club) REFERENCES clubs(id),
 PRIMARY KEY (id)
 );
