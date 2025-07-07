@@ -74,4 +74,14 @@ async function createNewMeeting(newMeeting) {
   }
 }
 
-module.exports = { createNewClub, createNewMembership, createNewBook, createNewMeeting }
+async function fetchClubsByMembership(userID) {
+  try {
+    const result = await connection('clubs').leftJoin('memberships', 'clubs.id', 'memberships.club').where('memberships.user', userID).select('clubs.id', 'clubs.name')
+    return result
+  } catch(err) {
+    console.log(err)
+    return false
+  }
+}
+
+module.exports = { createNewClub, createNewMembership, createNewBook, createNewMeeting, fetchClubsByMembership }
