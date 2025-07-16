@@ -1,7 +1,9 @@
 const { createNewMeeting } = require('../../db/dbClubQueries')
+const dayjs = require('dayjs')
 
 async function addNewMeeting(req, res) {
   const newMeeting = req.body
+  newMeeting.date = dayjs(newMeeting.date).format('YYYY-MM-DD HH:mm:ss')
 
   try {
     const newMeetingData = await createNewMeeting(newMeeting)

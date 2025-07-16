@@ -84,4 +84,27 @@ async function fetchClubsByMembership(userID) {
   }
 }
 
-module.exports = { createNewClub, createNewMembership, createNewBook, createNewMeeting, fetchClubsByMembership }
+async function fetchClubDetailsByClubId(clubID) {
+  try {
+    const result = await connection('clubs')
+      .join('memberships', 'clubs.id', 'memberships.club')
+      .join('users', 'memberships.user', 'users.id')
+      .join('meetings', 'clubs.id', 'meetings.club')
+      .join('books', 'clubs.id', 'books.club')
+      .where('clubs.id', clubID)
+      .select({
+        club: 'clubs.name',
+        members: 'users.username',
+        meetingDate: 'meetings.date',
+        meetingLocation: 'meetings.location',
+        bookTitle: 'books.title',
+        bookAuthor: 'books.author'
+      })
+      return result
+  } catch(err) {
+    console.log(err)
+    return false
+  }
+}
+
+module.exports = { createNewClub, createNewMembership, createNewBook, createNewMeeting, fetchClubsByMembership, fetchClubDetailsByClubId }
