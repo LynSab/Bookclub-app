@@ -1,12 +1,38 @@
 const connection = require('./dbConnection')
 
-async function createNewClub(newClub) {
+async function createNewClub(newClub, membershipUserId) {
   try {
+    // TODO: TRANSACTION??
+
+    console.log(membershipUserId)
     await connection('clubs').insert({name: newClub})
-    return true
+    const clubDetail = await connection('clubs').where('name', newClub).select(['*']).first()
+
+    memberDetail = {
+      club: clubDetail.id,
+      user: membershipUserId
+    }
+    
+    const membership = await createNewMembership(memberDetail)
+
+    await createNewBook({"title": 'Not yet set', "author": 'n/a', "club": clubDetail.id})
+    
+    const date = new Date()
+    await createNewMeeting({"date": date, "location": 'Not yet set', "club": clubDetail.id})
+
+    if (membership === true) {
+      return true
+    } else {
+      return false
+    }
+    
   } catch(err) {
     console.log(err)
-    return false
+    if (err.code === 'ER_DUP_ENTRY') {
+      return 'Duplicate'
+    } else {
+      return false
+    }
   }
 }
 
@@ -34,6 +60,7 @@ async function createNewBook(newBook) {
   try {
     const currentBook = await fetchBookByClub(newBook.club)
 
+    // TODO: amend to use transaction for delete and insert
     if (currentBook) {
       await connection('books').where('id', currentBook.id).del()
     }
@@ -60,7 +87,8 @@ async function fetchMeetingByClub(clubID) {
 async function createNewMeeting(newMeeting) {
   try {
     const currentMeeting = await fetchMeetingByClub(newMeeting.club)
-
+    
+    // TODO: amend to use transaction for delete and insert
     if (currentMeeting) {
       await connection('meetings').where('id', currentMeeting.id).del()
     }

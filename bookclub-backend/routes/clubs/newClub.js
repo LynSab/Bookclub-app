@@ -1,22 +1,31 @@
 const { createNewClub } = require('../../db/dbClubQueries')
+const jwt = require('jsonwebtoken')
 
 async function addClub(req, res) {
+  console.log('here')
   const clubName = req.body.name
+  const decodedToken = jwt.decode(req.cookies.token)
+  const userId = decodedToken.userId
 
   try {
-    clubData = await createNewClub(clubName)
+    clubData = await createNewClub(clubName, userId)
 
     if (clubData === false) {
-    res.json({
-      success: false, 
-      body: 'Server error. Please try again.'
-    })
-  } else {
-    res.json({
+      res.json({
+        success: false, 
+        body: 'Server error. Please try again.'
+      })
+    } else if (clubData === 'Duplicate'){
+      res.json({
+        success: false, 
+        body: 'Club with this name already exists'
+      })
+    } else {
+      res.json({
         success: true,
         body: 'Sucessfully created new bookclub'
       })
-  }
+    }
 
   } catch(err) {
     console.log(err)
