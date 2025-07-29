@@ -16,7 +16,7 @@ import router from '../router';
         My Bookclubs
       </button>
 
-      <button class="w-full shadow-lg border-1 p-2 cursor-pointer active:bg-slate-200">
+      <button @click="router.push({ name: 'NewClub' })"class="w-full shadow-lg border-1 p-2 cursor-pointer active:bg-slate-200">
         Create a new club
       </button>
     </div>
