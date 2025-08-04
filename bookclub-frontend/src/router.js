@@ -6,6 +6,7 @@ import Clubs from './views/Clubs.vue';
 import ClubView from './views/ClubView.vue';
 import SignUp from './views/SignUp.vue';
 import NewClub from './views/NewClub.vue';
+import HomeContent from './views/HomeContent.vue';
 
 const routes = [
     {
@@ -17,6 +18,11 @@ const routes = [
                 path: 'clubs',
                 name: 'Clubs',
                 component: Clubs,
+            },
+            {
+                path: '/',
+                name: 'HomeContent',
+                component: HomeContent,
             },
             {
               path: 'clubs/:clubId',

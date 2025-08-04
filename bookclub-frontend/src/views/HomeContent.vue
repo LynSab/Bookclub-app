@@ -1,39 +1,36 @@
 <script setup>
   import { ref } from 'vue'
   import router from '../router';
-
+  
+  const username = ref('user')
   const error = ref()
-  const bookclubs = ref([])
 
-  async function fetchClubs() {
+  async function fetchUsername() {
     try {
       const requestOptions = {
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include'
       }
-      const result = await fetch('http://localhost:8080/club/', requestOptions)
+      const result = await fetch('http://localhost:8080/user/get', requestOptions)
       const data = await result.json()
-
+ 
       if (data.cookieError) {
         router.push({ name: 'Login' })
       } else {
-        bookclubs.value = data
+        username.value = data.body
       }
+
     } catch(err) {
       error.value = 'Unable to fetch data. Please try again.'
     }
   }
 
-fetchClubs()
-</script>
+  fetchUsername()
+  </script>
 
 <template>
-  <h3 class="text-xl font-semibold">My Clubs</h3>
-  <div v-if="error">{{ error }}</div>
-  <div v-else class="p-3" v-for="bookclub in bookclubs">
-    <button @click="router.push({ name: 'ClubView', params: {clubId: bookclub.id}})" class="cursor-pointer active:bg-slate-200">{{ bookclub.name }}</button>
-  </div>
+    <div>Hello {{ username }}, Welcome to chapters. your bookclub management app.</div>
 </template>
 
 <style scoped></style>

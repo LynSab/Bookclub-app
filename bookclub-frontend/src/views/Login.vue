@@ -21,7 +21,7 @@
       const data = await result.json()
       if (data.success == true) {
         userId.value = data.body.id
-        router.push({name: 'Home'})
+        router.push({name: 'HomeContent'})
       } else {
         loginError.value = data.body
       }
