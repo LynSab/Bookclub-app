@@ -1,10 +1,11 @@
 <script setup>
   import { ref } from 'vue'
   import TextInput from '../components/TextInput.vue';
+  import router from '../router';
+
 
   const newClub = ref()
   const error = ref()
-  const clubError = ref()
   const clubSuccess = ref()
 
 
@@ -22,11 +23,14 @@
 
       if (data.success == true) {
         clubSuccess.value = data.body
-      } else{
-        clubError.value = data.body
+      } else if (data.cookieError) {
+          router.push({ name: 'Login' })
+      } else {
+        error.value = data.body
       }
+      
     } catch (err) {
-        error.value = 'Unable to fetch data. Please try again.'
+        error.value = 'Error. Please try again'
     }
   }
 
@@ -42,6 +46,7 @@
     <TextInput pt-5 legend-text="clubname" v-model:title="newClub"/>
     <button @click='handler(newClub)' class="shadow-lg border-1 rounded-md p-1 ml-5 cursor-pointer active:bg-slate-200">Submit</button>
   </div>
+  <div v-if="error">{{ error }}</div>
 </template>
 
 <style scoped></style>

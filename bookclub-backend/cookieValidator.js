@@ -5,15 +5,21 @@ async function cookieValidator(cookies) {
     console.log('cookie validation')
     const decoded = jwt.verify(cookies.token, process.env.JWT_SECRET)
     console.log(decoded)
+    return true
   } catch (err) {
-      const error = 'Invalid cookies'
-      throw error
+      console.log(err)
+      return false
   }
 }
 
 async function validateCookies(req, res, next) {
-  await cookieValidator(req.cookies)
-  next()
+  const cookie = await cookieValidator(req.cookies)
+  
+  if (cookie) {
+    next()
+  } else {
+   res.json({cookieError: 'invalid cookie'})
+  }
 }
 
 module.exports = validateCookies

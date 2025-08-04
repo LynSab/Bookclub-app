@@ -10,6 +10,16 @@ async function fetchUserByEmail(userEmail) {
   }
 }
 
+async function fetchUserById(userId) {
+  try {
+    const result = await connection('users').where('id', userId).select(['*']).first()
+    return result
+  } catch(err) {
+    console.log(err)
+    return false
+  }
+}
+
 async function createNewUser(newUser) {
   try {
     await connection('users').insert(newUser)
@@ -24,4 +34,4 @@ async function createNewUser(newUser) {
   }
 }
 
-module.exports = { fetchUserByEmail, createNewUser }
+module.exports = { fetchUserByEmail, createNewUser, fetchUserById }

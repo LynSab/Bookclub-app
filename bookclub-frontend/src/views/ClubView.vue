@@ -4,6 +4,8 @@
   import TextInput from '../components/TextInput.vue';
   import Datepicker from '@vuepic/vue-datepicker'
   import '@vuepic/vue-datepicker/dist/main.css';
+  import router from '../router';
+
 
   const route = useRoute()
   const error = ref()
@@ -27,11 +29,18 @@
       }
       const result = await fetch('http://localhost:8080/club/' + clubId, requestOptions)
         const data = await result.json()
-        currentClub.value = data
+
+        if (data.cookieError) {
+          router.push({ name: 'Login' })
+        } else {
+          currentClub.value = data
+          loading.value = false
+        }
+
       } catch(err) {
         error.value = 'Unable to fetch data. Please try again.'
+        loading.value = false
       }
-    loading.value = false
   }
 
   async function addNewMember(clubId, email) {

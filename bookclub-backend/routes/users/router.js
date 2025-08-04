@@ -6,7 +6,7 @@ const cookieValidator = require('../../cookieValidator')
 
 const userRouter = express.Router()
 
-userRouter.get('/:id', cookieValidator, getUser)
+userRouter.get('/get', cookieValidator, getUser)
 userRouter.post('/', signUp)
 userRouter.post('/login', login)
 
