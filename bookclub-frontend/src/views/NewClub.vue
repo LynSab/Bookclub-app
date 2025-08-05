@@ -47,6 +47,7 @@
     <button @click='handler(newClub)' class="shadow-lg border-1 rounded-md p-1 ml-5 cursor-pointer active:bg-slate-200">Submit</button>
   </div>
   <div v-if="error">{{ error }}</div>
+  <div v-if="clubSuccess">{{ clubSuccess }}</div>
 </template>
 
 <style scoped></style>
