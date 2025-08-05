@@ -2,30 +2,24 @@ const connection = require('./dbConnection')
 
 async function createNewClub(newClub, membershipUserId) {
   try {
-    // TODO: TRANSACTION??
+    await connection.transaction(async (trx) => {
+      await trx('clubs').insert({name: newClub})
 
-    console.log(membershipUserId)
-    await connection('clubs').insert({name: newClub})
-    const clubDetail = await connection('clubs').where('name', newClub).select(['*']).first()
+      const clubDetail = await trx('clubs').where('name', newClub).select(['*']).first()
 
-    memberDetail = {
-      club: clubDetail.id,
-      user: membershipUserId
-    }
-    
-    const membership = await createNewMembership(memberDetail)
+      memberDetail = {
+        club: clubDetail.id,
+        user: membershipUserId
+      }
+      await trx('memberships').insert(memberDetail)
 
-    await createNewBook({"title": 'Not yet set', "author": 'n/a', "club": clubDetail.id})
-    
-    const date = new Date()
-    await createNewMeeting({"date": date, "location": 'Not yet set', "club": clubDetail.id})
+      await trx('books').insert({"title": 'Not yet set', "author": 'n/a', "club": clubDetail.id})
 
-    if (membership === true) {
+      const date = new Date()
+      await trx('meetings').insert({"date": date, "location": 'Not yet set', "club": clubDetail.id})
+
       return true
-    } else {
-      return false
-    }
-    
+    })
   } catch(err) {
     console.log(err)
     if (err.code === 'ER_DUP_ENTRY') {
@@ -60,14 +54,14 @@ async function createNewBook(newBook) {
   try {
     const currentBook = await fetchBookByClub(newBook.club)
 
-    // TODO: amend to use transaction for delete and insert
-    if (currentBook) {
-      await connection('books').where('id', currentBook.id).del()
-    }
+    await connection.transaction(async (trx) => {
+      if (currentBook) {
+        await trx('books').where('id', currentBook.id).del()
+      }
 
-    await connection('books').insert(newBook)
-    return true
-
+      await trx('books').insert(newBook)
+      return true
+    })
   } catch(err) {
     console.log(err)
     return false
@@ -88,14 +82,14 @@ async function createNewMeeting(newMeeting) {
   try {
     const currentMeeting = await fetchMeetingByClub(newMeeting.club)
     
-    // TODO: amend to use transaction for delete and insert
-    if (currentMeeting) {
-      await connection('meetings').where('id', currentMeeting.id).del()
-    }
-
-    await connection('meetings').insert(newMeeting)
-    return true
-
+    await connection.transaction(async (trx) => {
+      if (currentMeeting) {
+        await trx('meetings').where('id', currentMeeting.id).del()
+      }
+  
+      await trx('meetings').insert(newMeeting)
+      return true
+    })
   } catch(err) {
     console.log(err)
     return false
