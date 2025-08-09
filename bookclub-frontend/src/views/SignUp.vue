@@ -43,21 +43,23 @@
 </script>
 
 <template>
-  <div class="grid grid-rows-4 h-screen place-content-center">
-    <div class="text-5xl text-slate-600 col-start-2 self-center">
-      <h1>chapters.</h1>
-    </div>
-    <div v-if="error">{{ error }}</div>
-    <div v-else class="shadow-lg border-2 rounded-md text-slate-600 bg-white row-start-2 row-span-2 col-start-2">
-      <h1 class="m-4 pt-5 text-2xl font-semibold">Sign-up</h1>
-      <TextInput pt-5 legend-text="Username" v-model:title="username"/>
-      <TextInput legend-text="Email" v-model:title="email"/>
-      <TextInput type="password" legend-text="Password" v-model:title="password"/> 
-      <TextInput type="password" legend-text="Confirm Password" v-model:title="passwordConfirmation"/> 
-      <button @click='handler(username, email, password, passwordConfirmation)' class="shadow-lg border-1 rounded-md p-1 ml-5 cursor-pointer active:bg-slate-200">Sign-up</button>
-      <div v-if="signUpError"> {{ signUpError }} </div>
-      <div> Already have an account? 
-        <button @click="router.push({ name: 'Login'})"class="cursor-pointer active:bg-slate-200">Log in</button>
+  <div class="bg-[url('./assets/imgs/books.png')] bg-cover h-screen content-center">
+    <div class="flex flex-col justify-self-center">
+      <div class="text-5xl text-white mx-20 mb-10">
+        <h1>chapters.</h1>
+      </div>
+      <div v-if="error">{{ error }}</div>
+      <div v-else class="shadow-lg rounded-md text-slate-600 p-3 bg-white/95">
+        <h1 class="pl-5 text-2xl font-semibold ">Sign-up</h1>
+        <TextInput pt-5 legend-text="Username" v-model:title="username"/>
+        <TextInput legend-text="Email" v-model:title="email"/>
+        <TextInput type="password" legend-text="Password" v-model:title="password"/> 
+        <TextInput type="password" legend-text="Confirm Password" v-model:title="passwordConfirmation"/> 
+        <button @click='handler(username, email, password, passwordConfirmation)' class="shadow-lg border-1 rounded-md p-1 ml-5 cursor-pointer active:bg-slate-200">Sign-up</button>
+        <div v-if="signUpError"> {{ signUpError }} </div>
+        <div class="pt-5"> Already have an account? 
+          <button @click="router.push({ name: 'Login'})"class="cursor-pointer active:bg-slate-200">Log in</button>
+        </div>
       </div>
     </div>
   </div>
