@@ -37,7 +37,7 @@
 </script>
 
 <template>
-  <div class="bg-[url('./assets/imgs/books.png')] bg-cover h-screen content-center">
+  <div class="bg-[url('./assets/imgs/books.png')] bg-cover h-screen content-center text-white">
     <div class="flex flex-col justify-self-center">
       <div class="text-5xl text-white mx-20 mb-10">
         <h1>chapters.</h1>

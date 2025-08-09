@@ -18,7 +18,7 @@
       if (data.cookieError) {
         router.push({ name: 'Login' })
       } else {
-        username.value = data.body
+        username.value = data.body.name
       }
 
     } catch(err) {
@@ -30,7 +30,7 @@
   </script>
 
 <template>
-    <div>Hello {{ username }}, Welcome to chapters. your bookclub management app.</div>
+    <div class="text-white">Hello {{ username }}, Welcome to chapters. your bookclub management app.</div>
 </template>
 
 <style scoped></style>

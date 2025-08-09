@@ -29,9 +29,9 @@ fetchClubs()
 </script>
 
 <template>
-  <h3 class="text-xl font-semibold">My Clubs</h3>
+  <h3 class="text-xl font-semibold text-white">My Clubs</h3>
   <div v-if="error">{{ error }}</div>
-  <div v-else class="p-3" v-for="bookclub in bookclubs">
+  <div v-else class="p-3 text-white" v-for="bookclub in bookclubs">
     <button @click="router.push({ name: 'ClubView', params: {clubId: bookclub.id}})" class="cursor-pointer active:bg-slate-200">{{ bookclub.name }}</button>
   </div>
 </template>

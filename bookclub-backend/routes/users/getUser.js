@@ -15,7 +15,7 @@ async function getUser(req, res){
   } else {
     res.json({
       success: true,
-      body: userData.username
+      body: {name: userData.username, email: userData.email}
     })
   }
 }

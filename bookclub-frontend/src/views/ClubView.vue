@@ -124,18 +124,18 @@ fetchCurrentClub(route.params.clubId)
 <template>
   <div v-if="loading" class="w-4 h-4 border-2 border-t-transparent border-cyan-500 rounded-full animate-spin"></div>
   <div v-else-if="error">{{ error }}</div>
-  <div v-else>
-    <h3 class="text-xl font-semibold">{{ currentClub.name }}</h3>
+  <div class="text-white" v-else>
+    <h3 class="text-xl font-semibold ">{{ currentClub.name }}</h3>
     <div>
-      <h4 class="text-m font-semibold">Members: <button @click="newMember = true" class="shadow-lg border-1 rounded-md p-1 m-5 font-normal italic text-slate-600 text-sm cursor-pointer active:bg-slate-200">Add new member</button></h4> 
+      <h4 class="text-m font-semibold">Members: <button @click="newMember = true" class="shadow-lg border-1 rounded-md p-1 m-5 font-normal italic text-sm cursor-pointer active:bg-slate-200">Add new member</button></h4> 
       <div class="columns-3 m-2" v-if="newMember"><TextInput legend-text="New Member Email" v-model:title="email"/><button @click='newMemberHandler(email)' class="shadow-lg border-1 rounded-md p-1 my-9 font-normal italic text-slate-600 text-sm cursor-pointer active:bg-slate-200">Submit</button></div>
       <ul>
         <li v-for="member in currentClub.members">{{ member }}</li>
       </ul>
-      <h4 class="text-m font-semibold">Current Book: <button @click="newBook = true" class="shadow-lg border-1 rounded-md p-1 m-5 font-normal italic text-slate-600 text-sm cursor-pointer active:bg-slate-200">Change book</button></h4>
+      <h4 class="text-m font-semibold">Current Book: <button @click="newBook = true" class="shadow-lg border-1 rounded-md p-1 m-5 font-normal italic text-sm cursor-pointer active:bg-slate-200">Change book</button></h4>
       <div class="grid grid-cols-3 justify-start m-2" v-if="newBook"><TextInput legend-text="Title" v-model:title="bookTitle"/><TextInput legend-text="Author" v-model:title="bookAuthor"/><button @click='newBookHandler(bookTitle, bookAuthor)' class="w-32 shadow-lg border-1 rounded-md p-1 my-9 font-normal italic text-slate-600 text-sm cursor-pointer active:bg-slate-200">Submit</button></div>
       {{ currentClub.book.name }} by {{ currentClub.book.author }} 
-      <h4 class="text-m font-semibold">Next Meeting: <button @click="newMeeting = true" class="shadow-lg border-1 rounded-md p-1 m-5 font-normal italic text-slate-600 text-sm cursor-pointer active:bg-slate-200">Change next meeting</button></h4>
+      <h4 class="text-m font-semibold">Next Meeting: <button @click="newMeeting = true" class="shadow-lg border-1 rounded-md p-1 m-5 font-normal italic text-sm cursor-pointer active:bg-slate-200">Change next meeting</button></h4>
       <div class="grid grid-cols-3 m-2" v-if="newMeeting"><Datepicker class="my-8" v-model="meetingDate" /><TextInput legend-text="Location" v-model:title="meetingLocation"/><button @click='newMeetingHandler(meetingDate, meetingLocation)' class="w-32 shadow-lg border-1 rounded-md p-1 my-9 font-normal italic text-slate-600 text-sm cursor-pointer active:bg-slate-200">Submit</button></div>
       {{ currentClub.meeting.date }} at {{ currentClub.meeting.location }}
     </div>
