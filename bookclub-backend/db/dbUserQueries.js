@@ -34,4 +34,34 @@ async function createNewUser(newUser) {
   }
 }
 
-module.exports = { fetchUserByEmail, createNewUser, fetchUserById }
+async function updateUsername(newUsername, userId) {
+  try {
+    await connection('users').where({id: userId}).update({username: newUsername})
+    return true
+  } catch(err) {
+    console.log(err)
+    return false
+  }
+}
+
+async function updateUserEmail(newUserEmail, userId) {
+  try {
+    await connection('users').where({id: userId}).update({email: newUserEmail})
+    return true
+  } catch(err) {
+    console.log(err)
+    return false
+  }
+}
+
+async function updateUserPassword(newPassword, userId) {
+  try {
+    await connection('users').where({id: userId}).update({password: newPassword})
+    return true
+  } catch(err) {
+    console.log(err)
+    return false
+  }
+}
+
+module.exports = { fetchUserByEmail, createNewUser, fetchUserById, updateUsername, updateUserEmail, updateUserPassword }
