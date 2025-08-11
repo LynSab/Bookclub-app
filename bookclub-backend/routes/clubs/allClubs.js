@@ -2,7 +2,7 @@ const { fetchClubsByMembership } = require('../../db/dbClubQueries')
 const jwt = require('jsonwebtoken')
 
 async function allClubs(req, res){
-  const decodedToken = jwt.decode(req.cookies.token)
+  const decodedToken = jwt.verify(req.cookies.token, process.env.JWT_SECRET)
   const userId = decodedToken.userId
   const bookclubs = await fetchClubsByMembership(userId)
 

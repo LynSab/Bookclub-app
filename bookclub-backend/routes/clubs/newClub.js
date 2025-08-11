@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 async function addClub(req, res) {
   console.log('here')
   const clubName = req.body.name
-  const decodedToken = jwt.decode(req.cookies.token)
+  const decodedToken = jwt.verify(req.cookies.token, process.env.JWT_SECRET)
   const userId = decodedToken.userId
 
   clubData = await createNewClub(clubName, userId)

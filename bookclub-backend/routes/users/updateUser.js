@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
 async function updateUser(req, res) {
-  const decodedToken = jwt.decode(req.cookies.token)
+  const decodedToken = jwt.verify(req.cookies.token, process.env.JWT_SECRET)
   const userId = decodedToken.userId
   
   if (req.body.username) {
@@ -39,7 +39,7 @@ async function updateUser(req, res) {
     }
   } else if (req.body.currentPassword) {
 
-    currentRecord = await fetchUserById(userId)
+    const currentRecord = await fetchUserById(userId)
     const passwordMatch = await bcrypt.compare(req.body.currentPassword, currentRecord.password)
 
     if (passwordMatch === false) {
@@ -49,7 +49,7 @@ async function updateUser(req, res) {
       })
     } else {
       const salt = await bcrypt.genSalt(10)
-      newPassword = await bcrypt.hash(req.body.newPassword, salt)
+      const newPassword = await bcrypt.hash(req.body.newPassword, salt)
 
       const userData = await updateUserPassword(newPassword, userId)
 
