@@ -18,7 +18,7 @@ async function validateCookies(req, res, next) {
   if (cookie) {
     next()
   } else {
-   res.json({cookieError: 'invalid cookie'})
+    res.json({cookieError: 'invalid cookie'})
   }
 }
 
