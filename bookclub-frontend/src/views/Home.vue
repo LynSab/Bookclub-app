@@ -1,5 +1,24 @@
 <script setup>
 import router from '../router';
+import { ref } from 'vue'
+
+const error = ref()
+
+async function logout() {
+    try {
+      const requestOptions = {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include'
+      }
+      const result = await fetch('http://localhost:8080/user/logout/', requestOptions)
+      result.json()
+      
+      router.push({ name: 'Login' })
+    } catch(err) {
+      error.value = 'Unable to logout. Please try again.'
+    }
+}
 </script>
 
 <template>
@@ -7,7 +26,8 @@ import router from '../router';
     <div class = "grid-cols-1 p-5">
       <div class="col-1">
         <h1 class="text-6xl font-bold text-center text-white">chapters.</h1>
-        <button class="fixed top-3 right-3 shadow-lg border-1 rounded-md p-1 ml-5 cursor-pointer active:bg-slate-200 text-white">Logout</button>
+        <button @click="logout()" class="fixed top-3 right-3 shadow-lg border-1 rounded-md p-1 ml-5 cursor-pointer active:bg-slate-200 text-white">Logout</button>
+        <div v-if="error"> {{ error }}</div>
       </div>
     </div>
   
