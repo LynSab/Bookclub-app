@@ -27,7 +27,7 @@
       } else {
         signUpError.value = data.body
       }
-    } catch(err) {
+    } catch {
       error.value = 'Unable to fetch data. Please try again.'
     }
   }
@@ -58,7 +58,7 @@
         <button @click='handler(username, email, password, passwordConfirmation)' class="shadow-lg border-1 rounded-md p-1 ml-5 cursor-pointer active:bg-slate-200">Sign-up</button>
         <div v-if="signUpError"> {{ signUpError }} </div>
         <div class="pt-5"> Already have an account? 
-          <button @click="router.push({ name: 'Login'})"class="cursor-pointer active:bg-slate-200">Log in</button>
+          <button @click="router.push({ name: 'Login'})" class="cursor-pointer active:bg-slate-200">Log in</button>
         </div>
       </div>
     </div>

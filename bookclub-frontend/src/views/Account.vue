@@ -34,7 +34,7 @@
         email.value = data.body.email
       }
 
-    } catch(err) {
+    } catch {
       error.value = 'Unable to fetch data. Please try again.'
     }    
   }
@@ -59,7 +59,7 @@
         error.value = data.body
       }
 
-    } catch(err) {
+    } catch {
         error.value = 'Unable to fetch data. Please try again.'
     }
   }
@@ -84,7 +84,7 @@
         error.value = data.body
       }
 
-    } catch(err) {
+    } catch {
         error.value = 'Unable to fetch data. Please try again.'
     }
   }
@@ -112,7 +112,7 @@
         error.value = data.body
       }
 
-    } catch(err) {
+    } catch {
         error.value = 'Unable to fetch data. Please try again.'
     }
   }
@@ -126,12 +126,12 @@
     <div class="text-white">
         Username: {{ username }} <button @click="changeUsername = !changeUsername" class="shadow-lg border-1 rounded-md p-1 m-5 font-normal italic text-sm cursor-pointer active:bg-slate-200">Change Username</button>
     </div>
-    <div class="columns-3 m-2 text-white" v-if="changeUsername"><TextInput legend-text="New Username" v-model:title="newUsername"/><button @click='updateUsername(newUsername), changeUsername = false' class="shadow-lg border-1 rounded-md p-1 my-9 font-normal italic text-white text-sm cursor-pointer active:bg-slate-200">Submit</button></div>
+    <div class="columns-3 m-2 text-white" v-if="changeUsername"><TextInput legend-text="New Username" v-model:title="newUsername"/><button @click='updateUsername(newUsername), changeUsername = false, newUsername = ""' class="shadow-lg border-1 rounded-md p-1 my-9 font-normal italic text-white text-sm cursor-pointer active:bg-slate-200">Submit</button></div>
 
     <div class="text-white">
         Email: {{ email }} <button @click="changeEmail = !changeEmail" class="shadow-lg border-1 rounded-md p-1 m-5 font-normal italic text-sm cursor-pointer active:bg-slate-200">Change Email</button>
     </div>
-    <div class="columns-3 m-2 text-white" v-if="changeEmail"><TextInput legend-text="New Email" v-model:title="newEmail"/><button @click='updateEmail(newEmail), changeEmail = false' class="shadow-lg border-1 rounded-md p-1 my-9 font-normal italic text-white text-sm cursor-pointer active:bg-slate-200">Submit</button></div>
+    <div class="columns-3 m-2 text-white" v-if="changeEmail"><TextInput legend-text="New Email" v-model:title="newEmail"/><button @click='updateEmail(newEmail), changeEmail = false, newEmail = ""' class="shadow-lg border-1 rounded-md p-1 my-9 font-normal italic text-white text-sm cursor-pointer active:bg-slate-200">Submit</button></div>
 
     <div class="text-white">
         Password: <button @click="changePassword = !changePassword" class="shadow-lg border-1 rounded-md p-1 m-5 font-normal italic text-sm cursor-pointer active:bg-slate-200">Change Email</button>
@@ -140,7 +140,7 @@
         <TextInput type="password" legend-text="Current Password" v-model:title="oldPassword"/>
     </div>
     <div class="columns-3 m-2 text-white" v-if="changePassword">
-        <TextInput type="password" legend-text="New Password" v-model:title="password"/><button @click='updatePassword(oldPassword, password), changePassword = false' class="shadow-lg border-1 rounded-md p-1 my-9 font-normal italic text-white text-sm cursor-pointer active:bg-slate-200">Submit</button>
+        <TextInput type="password" legend-text="New Password" v-model:title="password"/><button @click='updatePassword(oldPassword, password), changePassword = false, oldPassword = "", password = ""' class="shadow-lg border-1 rounded-md p-1 my-9 font-normal italic text-white text-sm cursor-pointer active:bg-slate-200">Submit</button>
     </div>
     <div v-if="passwordMessage" class="text-white italic">{{ passwordMessage }}</div>
 

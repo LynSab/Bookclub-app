@@ -117,6 +117,7 @@ async function fetchClubDetailsByClubId(clubID) {
       .select({
         club: 'clubs.name',
         members: 'users.username',
+        memberId: 'users.id',
         meetingDate: 'meetings.date',
         meetingLocation: 'meetings.location',
         bookTitle: 'books.title',

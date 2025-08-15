@@ -20,7 +20,7 @@
       } else {
         bookclubs.value = data
       }
-    } catch(err) {
+    } catch {
       error.value = 'Unable to fetch data. Please try again.'
     }
   }
@@ -31,7 +31,7 @@ fetchClubs()
 <template>
   <h3 class="text-xl font-semibold text-white">My Clubs</h3>
   <div v-if="error">{{ error }}</div>
-  <div v-else class="p-3 text-white" v-for="bookclub in bookclubs">
+  <div v-else class="p-3 text-white" v-for="bookclub in bookclubs" :key="bookclub.id">
     <button @click="router.push({ name: 'ClubView', params: {clubId: bookclub.id}})" class="cursor-pointer active:bg-slate-200">{{ bookclub.name }}</button>
   </div>
 </template>

@@ -21,7 +21,7 @@
         username.value = data.body.name
       }
 
-    } catch(err) {
+    } catch {
       error.value = 'Unable to fetch data. Please try again.'
     }
   }

@@ -15,7 +15,7 @@ async function logout() {
       result.json()
       
       router.push({ name: 'Login' })
-    } catch(err) {
+    } catch {
       error.value = 'Unable to logout. Please try again.'
     }
 }
@@ -37,11 +37,11 @@ async function logout() {
           My Bookclubs
         </button>
   
-        <button @click="router.push({ name: 'NewClub' })"class="bg-[url('./assets/imgs/book_spine_red.png')] bg-cover w-full shadow-lg p-2 cursor-pointer active:bg-slate-200">
+        <button @click="router.push({ name: 'NewClub' })" class="bg-[url('./assets/imgs/book_spine_red.png')] bg-cover w-full shadow-lg p-2 cursor-pointer active:bg-slate-200">
           Create a new club
         </button>
   
-        <button @click="router.push({ name: 'Account' })"class="bg-[url('./assets/imgs/book_spine_yello.png')] bg-cover w-full shadow-lg p-2 cursor-pointer active:bg-slate-200">
+        <button @click="router.push({ name: 'Account' })" class="bg-[url('./assets/imgs/book_spine_yello.png')] bg-cover w-full shadow-lg p-2 cursor-pointer active:bg-slate-200">
           My Account
         </button>
       </div>

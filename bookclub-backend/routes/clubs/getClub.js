@@ -22,7 +22,7 @@ async function getClub(req, res) {
     }
 
     for (record of bookclub) {
-      clubRecord.members.push(record.members)
+      clubRecord.members.push({name: record.members, id: record.memberId})
     }
 
     res.json(clubRecord)
