@@ -1,0 +1,10 @@
+{
+  "name": "bookclub-app",
+  "version": "1.0.0",
+  "description": "An app for book club management.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lyn Sabiston",
+  "license": "MIT"
+}
