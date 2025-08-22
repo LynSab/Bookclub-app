@@ -1,13 +1,13 @@
 <script setup>
-  import { ref } from 'vue'
+  import { ref } from 'vue';
   import router from '../router';
   import TextInput from '../components/TextInput.vue';
 
-  const userId = ref()
-  const error = ref()
-  const email = ref()
-  const password = ref()
-  const loginError = ref('')
+  const userId = ref();
+  const error = ref();
+  const email = ref();
+  const password = ref();
+  const loginError = ref('');
 
   async function login(loginEmail, loginPassword) {
     try {
@@ -16,23 +16,23 @@
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({email: loginEmail, password: loginPassword}),
         credentials: 'include'
-      }
-      const result = await fetch('http://localhost:8080/user/login/', requestOptions)
-      const data = await result.json()
+      };
+      const result = await fetch('http://localhost:8080/user/login/', requestOptions);
+      const data = await result.json();
       if (data.success == true) {
-        userId.value = data.body.id
-        router.push({name: 'HomeContent'})
+        userId.value = data.body.id;
+        router.push({name: 'HomeContent'});
       } else {
-        loginError.value = data.body
+        loginError.value = data.body;
       }
     } catch {
-      error.value = 'Unable to fetch data. Please try again.'
+      error.value = 'Unable to fetch data. Please try again.';
     }
   }
 
   function handler(userEmail, userPassword) {
-    loginError.value = ''
-    login(userEmail, userPassword)
+    loginError.value = '';
+    login(userEmail, userPassword);
   }
 </script>
 

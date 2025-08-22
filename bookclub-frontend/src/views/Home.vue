@@ -1,8 +1,8 @@
 <script setup>
 import router from '../router';
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const error = ref()
+const error = ref();
 
 async function logout() {
     try {
@@ -10,13 +10,13 @@ async function logout() {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include'
-      }
-      const result = await fetch('http://localhost:8080/user/logout/', requestOptions)
-      result.json()
+      };
+      const result = await fetch('http://localhost:8080/user/logout/', requestOptions);
+      result.json();
       
-      router.push({ name: 'Login' })
+      router.push({ name: 'Login' });
     } catch {
-      error.value = 'Unable to logout. Please try again.'
+      error.value = 'Unable to logout. Please try again.';
     }
 }
 </script>

@@ -1,9 +1,9 @@
 <script setup>
-  import { ref } from 'vue'
+  import { ref } from 'vue';
   import router from '../router';
 
-  const error = ref()
-  const bookclubs = ref([])
+  const error = ref();
+  const bookclubs = ref([]);
 
   async function fetchClubs() {
     try {
@@ -11,21 +11,21 @@
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include'
-      }
-      const result = await fetch('http://localhost:8080/club/', requestOptions)
-      const data = await result.json()
+      };
+      const result = await fetch('http://localhost:8080/club/', requestOptions);
+      const data = await result.json();
 
       if (data.cookieError) {
-        router.push({ name: 'Login' })
+        router.push({ name: 'Login' });
       } else {
-        bookclubs.value = data
+        bookclubs.value = data;
       }
     } catch {
-      error.value = 'Unable to fetch data. Please try again.'
+      error.value = 'Unable to fetch data. Please try again.';
     }
   }
 
-fetchClubs()
+  fetchClubs();
 </script>
 
 <template>

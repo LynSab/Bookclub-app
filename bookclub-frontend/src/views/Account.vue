@@ -1,20 +1,20 @@
 <script setup>
-  import { ref } from 'vue'
+  import { ref } from 'vue';
   import router from '../router';
   import TextInput from '../components/TextInput.vue';
 
 
-  const username = ref()
-  const changeUsername = ref(false)
-  const newUsername = ref()
-  const email = ref()
-  const changeEmail = ref(false)
-  const newEmail = ref()
-  const password = ref()
-  const oldPassword = ref()
-  const changePassword = ref(false)
-  const error = ref()
-  const passwordMessage = ref()
+  const username = ref();
+  const changeUsername = ref(false);
+  const newUsername = ref();
+  const email = ref();
+  const changeEmail = ref(false);
+  const newEmail = ref();
+  const password = ref();
+  const oldPassword = ref();
+  const changePassword = ref(false);
+  const error = ref();
+  const passwordMessage = ref();
 
 
   async function fetchAccountDetails() {
@@ -23,44 +23,44 @@
         method: 'GET',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include'
-      }
-      const result = await fetch('http://localhost:8080/user/get', requestOptions)
-      const data = await result.json()
+      };
+      const result = await fetch('http://localhost:8080/user/get', requestOptions);
+      const data = await result.json();
  
       if (data.cookieError) {
-        router.push({ name: 'Login' })
+        router.push({ name: 'Login' });
       } else {
-        username.value = data.body.name
-        email.value = data.body.email
+        username.value = data.body.name;
+        email.value = data.body.email;
       }
 
     } catch {
-      error.value = 'Unable to fetch data. Please try again.'
+      error.value = 'Unable to fetch data. Please try again.';
     }    
   }
 
   async function updateUsername(username) {
     try {
-        const requestOptions = {
+      const requestOptions = {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({username: username}),
         credentials: 'include'
-      } 
+      }; 
 
-      const result = await fetch('http://localhost:8080/user/update', requestOptions)
-      const data = await result.json()
+      const result = await fetch('http://localhost:8080/user/update', requestOptions);
+      const data = await result.json();
 
       if (data.cookieError) {
-        router.push({ name: 'Login' })
+        router.push({ name: 'Login' });
       } else if (data.success == true) {
-        fetchAccountDetails()
+        fetchAccountDetails();
       } else {
-        error.value = data.body
+        error.value = data.body;
       }
 
     } catch {
-        error.value = 'Unable to fetch data. Please try again.'
+      error.value = 'Unable to fetch data. Please try again.';
     }
   }
 
@@ -71,21 +71,21 @@
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({email: email}),
         credentials: 'include'
-      } 
+      }; 
 
-      const result = await fetch('http://localhost:8080/user/update', requestOptions)
-      const data = await result.json()
+      const result = await fetch('http://localhost:8080/user/update', requestOptions);
+      const data = await result.json();
 
       if (data.cookieError) {
-        router.push({ name: 'Login' })
+        router.push({ name: 'Login' });
       } else if (data.success == true) {
-        fetchAccountDetails()
+        fetchAccountDetails();
       } else {
-        error.value = data.body
+        error.value = data.body;
       }
 
     } catch {
-        error.value = 'Unable to fetch data. Please try again.'
+        error.value = 'Unable to fetch data. Please try again.';
     }
   }
 
@@ -96,28 +96,28 @@
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({currentPassword: currentPword, newPassword: newPword}),
         credentials: 'include'
-      } 
+      }; 
 
-      const result = await fetch('http://localhost:8080/user/update', requestOptions)
-      const data = await result.json()
+      const result = await fetch('http://localhost:8080/user/update', requestOptions);
+      const data = await result.json();
 
       if (data.cookieError) {
-        router.push({ name: 'Login' })
+        router.push({ name: 'Login' });
       } else if (data.success == true) {
-        fetchAccountDetails()
-        passwordMessage.value = 'Password Changed Successfully'
-        setTimeout(() => passwordMessage.value = false, 2000)
-        console.log(passwordMessage)
+        fetchAccountDetails();
+        passwordMessage.value = 'Password Changed Successfully';
+        setTimeout(() => passwordMessage.value = false, 2000);
+        console.log(passwordMessage);
       } else {
-        error.value = data.body
+        error.value = data.body;
       }
 
     } catch {
-        error.value = 'Unable to fetch data. Please try again.'
+        error.value = 'Unable to fetch data. Please try again.';
     }
   }
 
-  fetchAccountDetails()
+  fetchAccountDetails();
 
 </script>
 
