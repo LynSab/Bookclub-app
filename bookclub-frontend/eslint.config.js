@@ -12,7 +12,9 @@ export default defineConfig([
     languageOptions: { globals: globals.browser },
     rules: { 
       'vue/multi-word-component-names': "off",
-      semi: ["error", "always"]
-     } 
-  },
+      semi: ["error", "always"],
+      "comma-dangle": ["error", "never"],
+      indent: ["error", 2]
+    } 
+  }
 ]);

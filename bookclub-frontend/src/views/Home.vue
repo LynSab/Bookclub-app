@@ -5,19 +5,19 @@ import { ref } from 'vue';
 const error = ref();
 
 async function logout() {
-    try {
-      const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        credentials: 'include'
-      };
-      const result = await fetch('http://localhost:8080/user/logout/', requestOptions);
-      result.json();
+  try {
+    const requestOptions = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      credentials: 'include'
+    };
+    const result = await fetch('http://localhost:8080/user/logout/', requestOptions);
+    result.json();
       
-      router.push({ name: 'Login' });
-    } catch {
-      error.value = 'Unable to logout. Please try again.';
-    }
+    router.push({ name: 'Login' });
+  } catch {
+    error.value = 'Unable to logout. Please try again.';
+  }
 }
 </script>
 
