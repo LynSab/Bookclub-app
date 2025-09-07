@@ -1,11 +1,11 @@
-const {fetchClubDetailsByClubId} = require('../../db/dbClubQueries')
-const dayjs = require('dayjs')
+const {fetchClubDetailsByClubId} = require('../../db/dbClubQueries');
+const dayjs = require('dayjs');
 
 async function getClub(req, res) {
   
-  const clubId = req.params.id
+  const clubId = req.params.id;
 
-  const bookclub = await fetchClubDetailsByClubId(clubId)
+  const bookclub = await fetchClubDetailsByClubId(clubId);
 
   if (bookclub && bookclub.length) {
     const clubRecord = {
@@ -19,19 +19,19 @@ async function getClub(req, res) {
         date: dayjs(bookclub[0].meetingDate).format('HH:mm on DD-MM-YYYY'),
         location: bookclub[0].meetingLocation
       }
+    };
+
+    for (const record of bookclub) {
+      clubRecord.members.push({name: record.members, id: record.memberId});
     }
 
-    for (record of bookclub) {
-      clubRecord.members.push({name: record.members, id: record.memberId})
-    }
-
-    res.json(clubRecord)
+    res.json(clubRecord);
   } else {
     res.json({
       success: false,
       body: 'Server error. Please try again.'
-    })
+    });
   }
 }
 
-module.exports = getClub
+module.exports = getClub;
