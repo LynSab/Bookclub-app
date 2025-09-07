@@ -1,7 +1,7 @@
 const express = require('express');
 const userRouter = require('./routes/users/router');
 const clubRouter = require('./routes/clubs/router');
-const validateCookies = require('./cookieValidator');
+const { validateCookies } = require('./cookieValidator');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-async function cookieValidator(cookies) {
+function cookieValidator(cookies) {
   try {
     console.log('cookie validation');
     const decoded = jwt.verify(cookies.token, process.env.JWT_SECRET);
@@ -12,8 +12,8 @@ async function cookieValidator(cookies) {
   }
 }
 
-async function validateCookies(req, res, next) {
-  const cookie = await cookieValidator(req.cookies);
+function validateCookies(req, res, next) {
+  const cookie = cookieValidator(req.cookies);
   
   if (cookie) {
     next();
@@ -22,4 +22,4 @@ async function validateCookies(req, res, next) {
   }
 }
 
-module.exports = validateCookies;
+module.exports = { cookieValidator, validateCookies };
