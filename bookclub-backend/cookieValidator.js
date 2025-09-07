@@ -1,25 +1,25 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 
 async function cookieValidator(cookies) {
   try {
-    console.log('cookie validation')
-    const decoded = jwt.verify(cookies.token, process.env.JWT_SECRET)
-    console.log(decoded)
-    return true
+    console.log('cookie validation');
+    const decoded = jwt.verify(cookies.token, process.env.JWT_SECRET);
+    console.log(decoded);
+    return true;
   } catch (err) {
-      console.log(err)
-      return false
+    console.log(err);
+    return false;
   }
 }
 
 async function validateCookies(req, res, next) {
-  const cookie = await cookieValidator(req.cookies)
+  const cookie = await cookieValidator(req.cookies);
   
   if (cookie) {
-    next()
+    next();
   } else {
-    res.json({cookieError: 'invalid cookie'})
+    res.json({cookieError: 'invalid cookie'});
   }
 }
 
-module.exports = validateCookies
+module.exports = validateCookies;

@@ -10,53 +10,53 @@ import HomeContent from './views/HomeContent.vue';
 import Account from './views/Account.vue';
 
 const routes = [
-    {
+  {
+    path: '/',
+    name: 'Home',
+    component: Home,
+    children: [
+      {
+        path: 'clubs',
+        name: 'Clubs',
+        component: Clubs
+      },
+      {
         path: '/',
-        name: 'Home',
-        component: Home,
-        children: [
-            {
-                path: 'clubs',
-                name: 'Clubs',
-                component: Clubs,
-            },
-            {
-                path: '/',
-                name: 'HomeContent',
-                component: HomeContent,
-            },
-            {
-              path: 'clubs/:clubId',
-              name: 'ClubView',
-              component: ClubView
-            },
-            {
-                path: 'clubs/new',
-                name: 'NewClub',
-                component: NewClub
-            },
-            {
-                path: 'account',
-                name: 'Account',
-                component: Account
-            }
-        ]
-    },
-    {
-        path: '/login',
-        name: 'Login',
-        component: Login
-    },
-    {
-        path: '/signup',
-        name: 'Sign-up',
-        component: SignUp
-    }
+        name: 'HomeContent',
+        component: HomeContent
+      },
+      {
+        path: 'clubs/:clubId',
+        name: 'ClubView',
+        component: ClubView
+      },
+      {
+        path: 'clubs/new',
+        name: 'NewClub',
+        component: NewClub
+      },
+      {
+        path: 'account',
+        name: 'Account',
+        component: Account
+      }
+    ]
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Login
+  },
+  {
+    path: '/signup',
+    name: 'Sign-up',
+    component: SignUp
+  }
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes: routes,
+  history: createWebHistory(),
+  routes: routes
 });
 
-export default router
+export default router;

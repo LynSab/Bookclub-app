@@ -1,4 +1,4 @@
-const knex = require('knex')
+const knex = require('knex');
 
 const connection = knex({
   client: 'mysql2',
@@ -7,8 +7,8 @@ const connection = knex({
     port: parseInt(process.env.DB_PORT),
     user: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-  },
-})
+    database: process.env.DB_NAME
+  }
+});
 
-module.exports = connection
+module.exports = connection;

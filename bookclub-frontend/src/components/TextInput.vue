@@ -1,6 +1,6 @@
 <script setup>
-  const {legendText, type='text', borderColour='white'} = defineProps(['legendText', 'type', 'borderColour'])
-  const title = defineModel('title')
+const {legendText, type='text', borderColour='white'} = defineProps(['legendText', 'type', 'borderColour']);
+const title = defineModel('title');
 </script>
 
 <template>

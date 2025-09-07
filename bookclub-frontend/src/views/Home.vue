@@ -1,23 +1,23 @@
 <script setup>
 import router from '../router';
-import { ref } from 'vue'
+import { ref } from 'vue';
 
-const error = ref()
+const error = ref();
 
 async function logout() {
-    try {
-      const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        credentials: 'include'
-      }
-      const result = await fetch('http://localhost:8080/user/logout/', requestOptions)
-      result.json()
+  try {
+    const requestOptions = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      credentials: 'include'
+    };
+    const result = await fetch('http://localhost:8080/user/logout/', requestOptions);
+    result.json();
       
-      router.push({ name: 'Login' })
-    } catch(err) {
-      error.value = 'Unable to logout. Please try again.'
-    }
+    router.push({ name: 'Login' });
+  } catch {
+    error.value = 'Unable to logout. Please try again.';
+  }
 }
 </script>
 
@@ -37,11 +37,11 @@ async function logout() {
           My Bookclubs
         </button>
   
-        <button @click="router.push({ name: 'NewClub' })"class="bg-[url('./assets/imgs/book_spine_red.png')] bg-cover w-full shadow-lg p-2 cursor-pointer active:bg-slate-200">
+        <button @click="router.push({ name: 'NewClub' })" class="bg-[url('./assets/imgs/book_spine_red.png')] bg-cover w-full shadow-lg p-2 cursor-pointer active:bg-slate-200">
           Create a new club
         </button>
   
-        <button @click="router.push({ name: 'Account' })"class="bg-[url('./assets/imgs/book_spine_yello.png')] bg-cover w-full shadow-lg p-2 cursor-pointer active:bg-slate-200">
+        <button @click="router.push({ name: 'Account' })" class="bg-[url('./assets/imgs/book_spine_yello.png')] bg-cover w-full shadow-lg p-2 cursor-pointer active:bg-slate-200">
           My Account
         </button>
       </div>

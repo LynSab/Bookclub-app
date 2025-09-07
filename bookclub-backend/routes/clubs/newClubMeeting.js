@@ -1,23 +1,23 @@
-const { createNewMeeting } = require('../../db/dbClubQueries')
-const dayjs = require('dayjs')
+const { createNewMeeting } = require('../../db/dbClubQueries');
+const dayjs = require('dayjs');
 
 async function addNewMeeting(req, res) {
-  const newMeeting = req.body
-  newMeeting.date = dayjs(newMeeting.date).format('YYYY-MM-DD HH:mm:ss')
+  const newMeeting = req.body;
+  newMeeting.date = dayjs(newMeeting.date).format('YYYY-MM-DD HH:mm:ss');
 
-  const newMeetingData = await createNewMeeting(newMeeting)
+  const newMeetingData = await createNewMeeting(newMeeting);
 
   if (newMeetingData === false) {
     res.json({
       success: false, 
       body: 'Server error. Please try again.'
-    })
+    });
   } else {
     res.json({
       success: true,
       body: 'Sucessfully set new meeting for the bookclub'
-    })
+    });
   }
 }
 
-module.exports = addNewMeeting
+module.exports = addNewMeeting;

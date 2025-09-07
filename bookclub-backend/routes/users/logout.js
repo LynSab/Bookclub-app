@@ -1,5 +1,5 @@
 function logout(req, res) {
-    res.clearCookie('token', {httpOnly: true}).json({success: 'true'})
+  res.clearCookie('token', {httpOnly: true}).json({success: 'true'});
 }
 
-module.exports = logout
+module.exports = logout;

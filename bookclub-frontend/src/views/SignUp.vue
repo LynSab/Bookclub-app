@@ -1,45 +1,45 @@
 <script setup>
-  import { ref } from 'vue'
-  import router from '../router';
-  import TextInput from '../components/TextInput.vue';
+import { ref } from 'vue';
+import router from '../router';
+import TextInput from '../components/TextInput.vue';
 
-  const userId = ref()
-  const error = ref()
-  const username = ref()
-  const email = ref()
-  const password = ref()
-  const passwordConfirmation = ref()
-  const signUpError = ref('')
+const userId = ref();
+const error = ref();
+const username = ref();
+const email = ref();
+const password = ref();
+const passwordConfirmation = ref();
+const signUpError = ref('');
 
-  async function signUp(signUpUsername, signUpEmail, signUpPassword) {
-    try {
-      const requestOptions = {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({username: signUpUsername,email: signUpEmail, password: signUpPassword}),
-        credentials: 'include'
-      }
-      const result = await fetch('http://localhost:8080/user/', requestOptions)
-      const data = await result.json()
-      if (data.success == true) {
-        userId.value = data.body.id
-        router.push({name: 'Login'})
-      } else {
-        signUpError.value = data.body
-      }
-    } catch(err) {
-      error.value = 'Unable to fetch data. Please try again.'
-    }
-  }
-
-  function handler(signUpUsername, signUpEmail, signUpPassword, pwordConf) {
-    signUpError.value = ''
-    if (signUpPassword === pwordConf) {
-      signUp(signUpUsername, signUpEmail, signUpPassword)
+async function signUp(signUpUsername, signUpEmail, signUpPassword) {
+  try {
+    const requestOptions = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({username: signUpUsername,email: signUpEmail, password: signUpPassword}),
+      credentials: 'include'
+    };
+    const result = await fetch('http://localhost:8080/user/', requestOptions);
+    const data = await result.json();
+    if (data.success == true) {
+      userId.value = data.body.id;
+      router.push({name: 'Login'});
     } else {
-      signUpError.value = 'Passwords don\'t match'
+      signUpError.value = data.body;
     }
+  } catch {
+    error.value = 'Unable to fetch data. Please try again.';
   }
+}
+
+function handler(signUpUsername, signUpEmail, signUpPassword, pwordConf) {
+  signUpError.value = '';
+  if (signUpPassword === pwordConf) {
+    signUp(signUpUsername, signUpEmail, signUpPassword);
+  } else {
+    signUpError.value = 'Passwords don\'t match';
+  }
+}
 </script>
 
 <template>
@@ -58,7 +58,7 @@
         <button @click='handler(username, email, password, passwordConfirmation)' class="shadow-lg border-1 rounded-md p-1 ml-5 cursor-pointer active:bg-slate-200">Sign-up</button>
         <div v-if="signUpError"> {{ signUpError }} </div>
         <div class="pt-5"> Already have an account? 
-          <button @click="router.push({ name: 'Login'})"class="cursor-pointer active:bg-slate-200">Log in</button>
+          <button @click="router.push({ name: 'Login'})" class="cursor-pointer active:bg-slate-200">Log in</button>
         </div>
       </div>
     </div>
